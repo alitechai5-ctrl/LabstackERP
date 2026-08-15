@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 205 23% 96%;
+    --foreground: 210 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 15%;
+    --primary: 200 85% 41%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 205 18% 90%;
+    --secondary-foreground: 210 30% 15%;
+    --muted: 205 16% 92%;
+    --muted-foreground: 210 12% 48%;
+    --accent: 200 85% 41%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 4 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 70% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 90% 48%;
+    --warning-foreground: 0 0% 100%;
+    --border: 205 14% 87%;
+    --input: 205 14% 87%;
+    --ring: 200 85% 41%;
+    --chart-1: 200 85% 41%;
+    --chart-2: 160 64% 40%;
+    --chart-3: 38 88% 50%;
+    --chart-4: 210 65% 55%;
+    --chart-5: 4 72% 50%;
+    --radius: 0.75rem;
+
+    --flag-normal: 160 64% 42%;
+    --flag-normal-bg: 160 64% 92%;
+    --flag-high: 0 72% 51%;
+    --flag-high-bg: 0 72% 94%;
+    --flag-low: 215 80% 50%;
+    --flag-low-bg: 215 80% 94%;
+    --flag-critical: 0 84% 50%;
+    --flag-critical-bg: 0 84% 94%;
+  }
+
+  .dark {
+    --background: 215 28% 8%;
+    --foreground: 210 20% 92%;
+    --card: 215 28% 11%;
+    --card-foreground: 210 20% 92%;
+    --popover: 215 28% 11%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 199 89% 56%;
+    --primary-foreground: 215 28% 8%;
+    --secondary: 215 20% 17%;
+    --secondary-foreground: 210 20% 92%;
+    --muted: 215 20% 16%;
+    --muted-foreground: 210 14% 60%;
+    --accent: 199 89% 56%;
+    --accent-foreground: 215 28% 8%;
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 215 28% 8%;
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 199 89% 56%;
+    --chart-1: 199 89% 56%;
+    --chart-2: 160 64% 50%;
+    --chart-3: 38 92% 56%;
+    --chart-4: 280 65% 68%;
+    --chart-5: 0 72% 60%;
+
+    --flag-normal: 160 64% 52%;
+    --flag-normal-bg: 160 40% 18%;
+    --flag-high: 0 72% 60%;
+    --flag-high-bg: 0 40% 18%;
+    --flag-low: 215 80% 60%;
+    --flag-low-bg: 215 50% 18%;
+    --flag-critical: 0 84% 62%;
+    --flag-critical-bg: 0 50% 18%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .flag-pill {
+    @apply inline-flex items-center gap-1 rounded-[3px] px-2 py-0.5 text-xs font-medium font-mono;
+  }
+  .flag-normal { background-color: hsl(var(--flag-normal-bg)); color: hsl(var(--flag-normal)); }
+  .flag-high { background-color: hsl(var(--flag-high-bg)); color: hsl(var(--flag-high)); }
+  .flag-low { background-color: hsl(var(--flag-low-bg)); color: hsl(var(--flag-low)); }
+  .flag-critical { background-color: hsl(var(--flag-critical-bg)); color: hsl(var(--flag-critical)); font-weight: 600; }
+
+  .data-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  .glass-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.04), 0 1px 2px -1px hsl(var(--foreground) / 0.04);
+  }
+
+  .stat-card {
+    @apply relative overflow-hidden rounded-xl border bg-card p-5 transition-all duration-300 hover:shadow-md hover:border-primary/20;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--stat-accent, hsl(var(--primary)));
+    border-radius: 12px 0 0 12px;
+  }
+
+  .kpi-trend-up { color: hsl(var(--success)); }
+  .kpi-trend-down { color: hsl(var(--destructive)); }
+
+  .statement-paper {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.06);
+  }
+
+  .statement-header {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.03), hsl(var(--chart-4) / 0.03));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+}
+
+@media print {
+  body { background: white !important; }
+  .print\:hidden { display: none !important; }
+}
+
+/* ── Dashboard Animations ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes draw-line {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes grow-bar {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes grow-width {
+  from { width: 0; }
+  to { width: var(--target-width, 100%); }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.3); }
+  70% { box-shadow: 0 0 0 8px hsl(var(--primary) / 0); }
+  100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in-up { animation: fade-in-up 0.5s ease-out both; }
+.animate-scale-in { animation: scale-in 0.4s ease-out both; }
+.animate-draw-line { stroke-dasharray: 1000; animation: draw-line 1.2s ease-out forwards; }
+.animate-grow-bar { transform-origin: bottom; animation: grow-bar 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-count-up { animation: count-up 0.4s ease-out both; }
+.animate-pulse-ring { animation: pulse-ring 2s infinite; }
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+
+/* Animated donut center label */
+.donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Animated horizontal bar */
+.hbar-track {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: hsl(var(--muted));
+  overflow: hidden;
+}
+.hbar-fill {
+  height: 100%;
+  border-radius: 4px;
+  animation: grow-width 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: width 0.3s ease;
+}
+
+/* Shimmer skeleton */
+.shimmer-skeleton {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.5) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* KPI mini sparkline */
+.kpi-sparkline {
+  height: 32px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Chart card hover */
+.chart-card-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.chart-card-hover:hover {
+  box-shadow: 0 4px 20px hsl(var(--foreground) / 0.08);
+  transform: translateY(-1px);
+}
