@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: { unoptimized: true },
-  output: 'standalone',
   webpack: (config, { isServer }) => {
     config.cache = false;
     config.parallelism = 1;
